@@ -9,8 +9,6 @@ import com.company.MyCollection.Exeptions.OutEception;
  */
 public interface AllMethod<E> {
 
-
-
     /** add object to collection*/
     public void add(E e);
 

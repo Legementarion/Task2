@@ -1,13 +1,9 @@
 package com.company;
 
 
-import com.company.MyCollection.ArrayListM;
-import com.company.MyCollection.LinkedListM;
-import com.company.MyCollection.MyType;
+import com.company.FileTask.FileMain;
 
-import java.util.ArrayList;
 import java.util.InputMismatchException;
-import java.util.List;
 import java.util.Scanner;
 
 
@@ -41,13 +37,8 @@ public class Main {
             }
         }
 
-//        LinkedListM<Integer> ol = new LinkedListM<>();
-//        ol.add(1);
-//        ol.add(2);
-//        ol.add(3);
-//        ol.add(2, 3);
-//        System.out.println(ol.get(0) + " " + ol.get(1) + " " + ol.get(2));
-//        ol.remove(2);
-//        System.out.println(ol.get(0) + " " + ol.get(1) + " " + ol.get(2));
+        FileMain fileMain = new FileMain();
+        fileMain.start();
+
     }
 }

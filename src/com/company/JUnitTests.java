@@ -27,6 +27,14 @@ public class JUnitTests {
         assertEquals(act, exp);
     }
 
+    //        LinkedListM<Integer> ol = new LinkedListM<>();
+//        ol.add(1);
+//        ol.add(2);
+//        ol.add(3);
+//        ol.add(2, 3);
+//        System.out.println(ol.get(0) + " " + ol.get(1) + " " + ol.get(2));
+//        ol.remove(2);
+//        System.out.println(ol.get(0) + " " + ol.get(1) + " " + ol.get(2));
 
 
 }
