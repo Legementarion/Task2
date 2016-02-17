@@ -1,7 +1,12 @@
 package com.company.FileTask;
 
 /**
- * Created by lego on 17.02.16.
+ * @author Lego on 17.02.2016.
+ * @version 1.0
  */
 public interface Connect {
+
+    String[] MassShips = MyData.arrayShips;
+
+    String[] MassClasses = MyData.arrayClasses;
 }
