@@ -83,9 +83,8 @@ public class ArrayListM<E> implements AllMethod<E>{
 
     /**
      * assigns the value of the index
-     *
-     * @param i
-     * @param e
+     * @param i index
+     * @param e value
      */
     @Override
     public void set(int i, E e) {
@@ -94,7 +93,7 @@ public class ArrayListM<E> implements AllMethod<E>{
     }
 
     /**
-     * Sort Ascending or Descending
+     * Sort by Ascending or Descending
      */
     @Override
     public void sort() {
@@ -133,10 +132,14 @@ public class ArrayListM<E> implements AllMethod<E>{
         return null;
     }
 
-    /** */
+    /** удаляет массив и создаёт новый массив с новыми значениями*/
     @Override
     public void init(E[] e) {
         elements=e;
         size = elements.length;
+    }
+
+    public E[] getArray(){
+        return elements;
     }
 }

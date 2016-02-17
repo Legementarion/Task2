@@ -6,7 +6,10 @@ import com.company.MyCollection.LinkedListM;
 import com.company.MyCollection.MyType;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
+import java.util.Scanner;
+
 
 /**
  * Main start class
@@ -15,20 +18,28 @@ public class Main {
 
     public static void main(String[] args) {
 
+        /** */
+        Scanner in = new Scanner(System.in);
+
+        /** */
+        StringBuilder buf = new StringBuilder("");
+
+        /** */
         int chouse = 0;
-        ArrayListM<Integer> fd= new ArrayListM<>();
-        fd.add(1);
-        fd.add(0, 3);
-        fd.add(2);
-        Integer[] eee = new Integer[]{1,3,2};
-        fd.init(eee);
-        System.out.println(fd.get(0) + " " + fd.get(1) + " " + fd.get(2));
-        fd.remove(0);
-        System.out.println(fd.get(0) + " " + fd.get(1) + " ");
 
-        System.out.println("1 - Arraylist, 2 - LinkedList; 3 - Map; 4 - Set;");
-        System.out.println("please enter your chouse");
 
+        while ((chouse<1)||(chouse>4)) {
+            System.out.println("1 - Arraylist, 2 - LinkedList; 3 - Map; 4 - Set;");
+            System.out.println("please enter your chouse");
+            try {
+                chouse = in.nextInt();
+            } catch (InputMismatchException ex) {
+                ex.printStackTrace();
+                chouse = 0;
+                in.reset();
+                System.out.println(" -only number!!");
+            }
+        }
 
 
 //        LinkedListM<Integer> ol = new LinkedListM<>();

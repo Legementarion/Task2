@@ -2,11 +2,15 @@ package com.company.MyCollection;
 
 import com.company.MyCollection.Exeptions.OutEception;
 
+
 /**
- * Created by Lego on 16.02.2016.
+ * @author Lego on 16.02.2016.
+ * @version 1.0
  */
 public class LinkedListM<E> implements AllMethod<E> {
 
+
+    /** */
     static class Link<E> {
         E object;
         Link<E> next;
@@ -16,8 +20,13 @@ public class LinkedListM<E> implements AllMethod<E> {
         }
     }
 
+    /** */
     Link<E> start = new Link<>(null);
+
+    /** */
     Link<E> end = start;
+
+    /** */
     int size = 0;
 
 
@@ -28,7 +37,6 @@ public class LinkedListM<E> implements AllMethod<E> {
 
     /**
      * add object to collection
-     *
      * @param e
      */
     @Override
@@ -58,9 +66,8 @@ public class LinkedListM<E> implements AllMethod<E> {
     }
 
     /**
-     * get object from collection
-     *
-     * @param i
+     * get by index object from collection
+     * @param i index
      */
     @Override
     public E get(int i) {
@@ -75,7 +82,6 @@ public class LinkedListM<E> implements AllMethod<E> {
 
     /**
      * remove object from collection
-     *
      * @param i
      */
     @Override
@@ -94,7 +100,6 @@ public class LinkedListM<E> implements AllMethod<E> {
 
     /**
      * assigns the value of the index
-     *
      * @param i
      * @param e
      */
@@ -150,6 +155,7 @@ public class LinkedListM<E> implements AllMethod<E> {
     }
 
     /**
+     *
      * @param e
      */
     @Override

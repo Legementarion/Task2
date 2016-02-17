@@ -1,5 +1,7 @@
 package com.company.javadockExemple;
 
+import java.io.*;
+
 /**
  * class with pow func.
  * @author lego
