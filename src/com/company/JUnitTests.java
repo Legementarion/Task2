@@ -4,7 +4,6 @@ import com.company.MyCollection.ArrayListM;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -23,8 +22,8 @@ public class JUnitTests {
     @Test
     public void test1(){
         al.add(1);
-        int act = 1;
-        int exp = al.size();
+        int exp = 1;
+        int act = al.size();
         assertEquals(act, exp);
     }
 

@@ -18,13 +18,13 @@ public class Main {
 
     public static void main(String[] args) {
 
-        /** */
+        /** input value from keyboard*/
         Scanner in = new Scanner(System.in);
 
         /** */
         StringBuilder buf = new StringBuilder("");
 
-        /** */
+        /** value for chouse*/
         int chouse = 0;
 
 
@@ -40,7 +40,6 @@ public class Main {
                 System.out.println(" -only number!!");
             }
         }
-
 
 //        LinkedListM<Integer> ol = new LinkedListM<>();
 //        ol.add(1);
