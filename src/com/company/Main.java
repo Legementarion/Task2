@@ -24,21 +24,21 @@ public class Main {
         int chouse = 0;
 
 
-        while ((chouse<1)||(chouse>4)) {
-            System.out.println("1 - Arraylist, 2 - LinkedList; 3 - Map; 4 - Set;");
-            System.out.println("please enter your chouse");
-            try {
-                chouse = in.nextInt();
-            } catch (InputMismatchException ex) {
-                ex.printStackTrace();
-                chouse = 0;
-                in.reset();
-                System.out.println(" -only number!!");
-            }
-        }
+//        while ((chouse<1)||(chouse>4)) {
+//            System.out.println("1 - Arraylist, 2 - LinkedList; 3 - Map; 4 - Set;");
+//            System.out.println("please enter your chouse");
+//            try {
+//                chouse = in.nextInt();
+//            } catch (InputMismatchException ex) {
+//                ex.printStackTrace();
+//                chouse = 0;
+//                in.reset();
+//                System.out.println(" -only number!!");
+//            }
+//        }
 
-        FileMain fileMain = new FileMain();
-        fileMain.start();
+//        FileMain fileMain = new FileMain();
+//        fileMain.start();
 
     }
 }

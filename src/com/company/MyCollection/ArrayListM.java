@@ -64,7 +64,7 @@ public class ArrayListM<E> implements AllMethod<E>{
      */
     @Override
     public E get(int i){
-        if (i>=size) {
+        if (i>=size|| i<0) {
             throw new ArrayIndexOutOfBoundsException();
         }
         return elements[i];
@@ -76,6 +76,9 @@ public class ArrayListM<E> implements AllMethod<E>{
      */
     @Override
     public void remove(int i) {
+        if (i>=size || i<0) {
+            throw new ArrayIndexOutOfBoundsException();
+        }
         elements = Arrays.copyOf(elements,size);
         System.arraycopy(elements, i+1, elements, i,size - i-1);
         size--;
@@ -88,7 +91,9 @@ public class ArrayListM<E> implements AllMethod<E>{
      */
     @Override
     public void set(int i, E e) {
-
+        if (i>=size || i<0) {
+            throw new ArrayIndexOutOfBoundsException();
+        }
         elements[i] = e;
     }
 
@@ -97,15 +102,52 @@ public class ArrayListM<E> implements AllMethod<E>{
      */
     @Override
     public void sort() {
-
+        int start = 0;
+        int end = size - 1;
+//        dosort(start,end);
     }
+
+
+//    public void dosort(int start, int end){
+//        if (start >= end)
+//            return;
+//        int i = start, j = end;
+//        int cur = i - (i - j) / 2;
+//        while (i < j) {
+//            while (i < cur && ((E[])elements[i]. <= (E[])elements[cur])) {
+//                i++;
+//            }
+//            while (j > cur && (elements[cur] <= elements[j])) {
+//                j--;
+//            }
+//            if (i < j) {
+//                int temp = elements[i];
+//                elements[i] = elements[j];
+//                elements[j] = temp;
+//                if (i == cur)
+//                    cur = j;
+//                else if (j == cur)
+//                    cur = i;
+//            }
+//        }
+//        sort(start, cur);
+//        sort(cur+1, end);
+//    }
 
     /**
      * reverse all object of collection
      */
     @Override
     public void reverse() {
-
+        if (size <= 1) {
+            return;
+        }
+        E temp;
+        for (int i = 0; i< size/2; i++){
+                temp = elements[i];
+                elements[i] = elements[size - 1 - i];
+                elements[size - 1 - i] = temp;
+        }
     }
 
     /**
@@ -132,11 +174,18 @@ public class ArrayListM<E> implements AllMethod<E>{
         return null;
     }
 
-    /** удаляет массив и создаёт новый массив с новыми значениями*/
+    /**
+     *
+     * */
     @Override
     public void init(E[] e) {
-        elements=e;
-        size = elements.length;
+        if(e == null){
+            elements=e;
+            size = 0;
+        } else {
+            elements = e;
+            size = elements.length;
+        }
     }
 
     public E[] getArray(){

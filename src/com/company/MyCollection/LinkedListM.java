@@ -58,10 +58,12 @@ public class LinkedListM<E> implements AllMethod<E> {
             i--;
         }
         Link<E> bLink = new Link<>(e);
-        eLink.prev.next = bLink;
+
         bLink.prev = eLink.prev;
         bLink.next = eLink;
+
         eLink.prev = bLink;
+        eLink.prev.next = bLink;
 
     }
 
@@ -92,9 +94,13 @@ public class LinkedListM<E> implements AllMethod<E> {
             eLink = eLink.next;
             i--;
         }
-        eLink.next.prev=eLink.prev;
-        eLink.prev.next=eLink.next;
-        eLink=null;
+        if (eLink.next != null){
+            eLink.prev.next=eLink.next;
+            eLink.next.prev=eLink.prev;
+        } else {
+            eLink.prev.next=null;
+        }
+
         size--;
     }
 
@@ -164,6 +170,16 @@ public class LinkedListM<E> implements AllMethod<E> {
     }
 
 
+    public E[] getArray(){
+        E[] temp = (E[])new Object[size];
+        int i = 0;
+        Link<E> eLink = start.next;
+        while (i<size) {
+            temp[i] = get(i);
+            i++;
+        }
+        return temp;
+    }
 
 
 
