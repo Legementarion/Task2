@@ -42,8 +42,6 @@ public class FileMain {
                 int i = 0;
                 while(i < arrayListM.size()){
                     if (arrayListM.get(i).contains(split[0])) {
-//                        String[] split2 = arrayListM.get(a).split(", ");
-//                        split2[0] = "USA_" + split2[0].toString();
                         arrayListM.set(i, "USA_"+arrayListM.get(i));
                     }
                     i++;

@@ -1,6 +1,7 @@
 package com.company;
 
 
+import com.company.ClientServer.MainControlConnection;
 import com.company.FileTask.FileMain;
 
 import java.util.InputMismatchException;
@@ -39,6 +40,9 @@ public class Main {
 
 //        FileMain fileMain = new FileMain();
 //        fileMain.start();
+
+        MainControlConnection c = new MainControlConnection();
+        c.go();
 
     }
 }
