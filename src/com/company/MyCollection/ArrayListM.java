@@ -52,6 +52,7 @@ public class ArrayListM<E> implements AllMethod<E>{
      * @param e value
      */
     public void add(int i, E e){
+        if (i<0 || i>size) throw new ArrayIndexOutOfBoundsException();
         size++;
         elements = Arrays.copyOf(elements,size);
         System.arraycopy(elements, i, elements, i + 1,size-1 - i);
@@ -104,35 +105,35 @@ public class ArrayListM<E> implements AllMethod<E>{
     public void sort() {
         int start = 0;
         int end = size - 1;
-//        dosort(start,end);
+        dosort(start,end);
     }
 
 
-//    public void dosort(int start, int end){
-//        if (start >= end)
-//            return;
-//        int i = start, j = end;
-//        int cur = i - (i - j) / 2;
-//        while (i < j) {
-//            while (i < cur && ((E[])elements[i]. <= (E[])elements[cur])) {
-//                i++;
-//            }
-//            while (j > cur && (elements[cur] <= elements[j])) {
-//                j--;
-//            }
-//            if (i < j) {
-//                int temp = elements[i];
-//                elements[i] = elements[j];
-//                elements[j] = temp;
-//                if (i == cur)
-//                    cur = j;
-//                else if (j == cur)
-//                    cur = i;
-//            }
-//        }
-//        sort(start, cur);
-//        sort(cur+1, end);
-//    }
+    public void dosort(int start, int end){
+        if (start >= end)
+            return;
+        int i = start, j = end;
+        int cur = i - (i - j) / 2;
+        while (i < j) {
+            while (i < cur && (elements[i] == elements[cur])) {
+                i++;
+            }
+            while (j > cur && (elements[cur].hashCode() <= elements[j].hashCode())) {
+                j--;
+            }
+            if (i < j) {
+                E temp = elements[i];
+                elements[i] = elements[j];
+                elements[j] = temp;
+                if (i == cur)
+                    cur = j;
+                else if (j == cur)
+                    cur = i;
+            }
+        }
+        dosort(start, cur);
+        dosort(cur+1, end);
+    }
 
     /**
      * reverse all object of collection

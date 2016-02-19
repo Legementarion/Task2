@@ -15,8 +15,9 @@ public class LinkedListM<E> implements AllMethod<E> {
         E object;
         Link<E> next;
         Link<E> prev;
+
         Link(E e) {
-            object=e;
+            object = e;
         }
     }
 
@@ -30,13 +31,13 @@ public class LinkedListM<E> implements AllMethod<E> {
     int size = 0;
 
 
-
     public LinkedListM() {
 
     }
 
     /**
      * add object to collection
+     *
      * @param e
      */
     @Override
@@ -46,34 +47,43 @@ public class LinkedListM<E> implements AllMethod<E> {
     }
 
     /**
-     *
      * @param i
      * @param e
      */
-    public void add(int i, E e){
-        if (i<0 || i>=size) throw new ArrayIndexOutOfBoundsException();
+    public void add(int i, E e) {
+        if (i < 0 || i > size) throw new ArrayIndexOutOfBoundsException();
         Link<E> eLink = start.next;
-        while (i > 0) {
-            eLink = eLink.next;
-            i--;
+
+        if (i == size) {
+            add(e);
+        } else {
+            while (i > 0) {
+                eLink = eLink.next;
+                i--;
+            }
+            Link<E> bLink = new Link<>(e);
+            size++;
+
+            if ((eLink.prev == null) && (eLink.next != null)) {
+                eLink.prev = bLink;
+                bLink.next = eLink;
+            }  else {
+                bLink.next = eLink;
+                bLink.prev = eLink.prev;
+                eLink.prev = bLink;
+                eLink.prev.next = bLink;
+            }
         }
-        Link<E> bLink = new Link<>(e);
-
-        bLink.prev = eLink.prev;
-        bLink.next = eLink;
-
-        eLink.prev = bLink;
-        eLink.prev.next = bLink;
-
     }
 
     /**
      * get by index object from collection
+     *
      * @param i index
      */
     @Override
     public E get(int i) {
-        if (i<0 || i>=size) throw new ArrayIndexOutOfBoundsException();
+        if ((i < 0 || i >= size) || (size==0) ) throw new ArrayIndexOutOfBoundsException();
         Link<E> eLink = start.next;
         while (i > 0) {
             eLink = eLink.next;
@@ -84,34 +94,38 @@ public class LinkedListM<E> implements AllMethod<E> {
 
     /**
      * remove object from collection
+     *
      * @param i
      */
     @Override
     public void remove(int i) {
-        if (i<0 || i>=size) throw new ArrayIndexOutOfBoundsException();
+        if (i < 0 || i >= size) throw new ArrayIndexOutOfBoundsException();
         Link<E> eLink = start.next;
         while (i > 0) {
             eLink = eLink.next;
             i--;
         }
-        if (eLink.next != null){
-            eLink.prev.next=eLink.next;
-            eLink.next.prev=eLink.prev;
-        } else {
-            eLink.prev.next=null;
+        if ((eLink.next == null) && (eLink.prev != null)) {
+            eLink.prev.next = null;
+        } else if ((eLink.prev == null) && (eLink.next != null)) {
+            eLink.next.prev = null;
+        } else if ((eLink.prev != null) && (eLink.next != null)) {
+            eLink.prev.next = eLink.next;
+            eLink.next.prev = eLink.prev;
         }
-
+        eLink = null;
         size--;
     }
 
     /**
      * assigns the value of the index
+     *
      * @param i
      * @param e
      */
     @Override
     public void set(int i, E e) {
-        if (i<0 || i>=size) throw new ArrayIndexOutOfBoundsException();
+        if (i < 0 || i >= size) throw new ArrayIndexOutOfBoundsException();
         Link<E> eLink = start.next;
         while (i > 0) {
             eLink = eLink.next;
@@ -133,7 +147,20 @@ public class LinkedListM<E> implements AllMethod<E> {
      */
     @Override
     public void reverse() {
-
+        int i=0;
+        E[] e = (E[])new Object[size];
+        Link<E> link = start.next;
+        while (i<size) {
+            e[i]=link.object;
+            link=link.next;
+            i++;
+        }
+        i=size-1;
+        clear();
+        while (i>=0) {
+            add(e[i]);
+            i--;
+        }
     }
 
     /**
@@ -161,26 +188,43 @@ public class LinkedListM<E> implements AllMethod<E> {
     }
 
     /**
-     *
      * @param e
      */
     @Override
     public void init(E[] e) {
+        clear();
+        int i =0;
+        while (i<e.length) {
+            add(e[i]);
+            i++;
+        }
+    }
 
+    public void clear() {
+        if (size==0) {
+            return;
+        }
+        Link<E> link = start.next;
+        start.next=null;
+        end=start;
+        while (link.next!=null) {
+            link=link.next;
+            link.prev=null;
+        }
+        size=0;
     }
 
 
-    public E[] getArray(){
-        E[] temp = (E[])new Object[size];
+    public E[] getArray() {
+        E[] temp = (E[]) new Object[size];
         int i = 0;
         Link<E> eLink = start.next;
-        while (i<size) {
+        while (i < size) {
             temp[i] = get(i);
             i++;
         }
         return temp;
     }
-
 
 
 }

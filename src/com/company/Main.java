@@ -3,8 +3,11 @@ package com.company;
 
 import com.company.ClientServer.MainControlConnection;
 import com.company.FileTask.FileMain;
+import com.company.MyCollection.LinkedListM;
 
+import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.LinkedList;
 import java.util.Scanner;
 
 
@@ -37,12 +40,16 @@ public class Main {
 //                System.out.println(" -only number!!");
 //            }
 //        }
+//
+
+
+
 
 //        FileMain fileMain = new FileMain();
 //        fileMain.start();
 
-        MainControlConnection c = new MainControlConnection();
-        c.go();
+//        MainControlConnection c = new MainControlConnection();
+//        c.go();
 
     }
 }

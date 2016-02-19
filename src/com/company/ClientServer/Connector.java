@@ -14,11 +14,18 @@ public class Connector implements Runnable{
 	private static Socket connection;
 //	private static boolean isRunning = true;
 
+	Connector(String str){
+        try {
+            connection = new Socket(InetAddress.getByName(str), 1111);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+	}
+
 	@Override
 	public void run() {
 		try {
 			while(true){
-				connection = new Socket(InetAddress.getByName("192.168.88.35"), 1111);
 				output = new ObjectOutputStream(connection.getOutputStream());
 				output.flush();
 				input = new ObjectInputStream(connection.getInputStream());
@@ -51,14 +58,6 @@ public class Connector implements Runnable{
 			input.close();
 			connection.close();
 		} catch (Exception e) {e.printStackTrace();}
-	}
-
-	public void con (String str){
-		try {
-			connection = new Socket(InetAddress.getByName(str), 1111);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 	}
 
 }

@@ -2,6 +2,7 @@ package com.company;
 
 import com.company.MyCollection.ArrayListM;
 import com.company.MyCollection.LinkedListM;
+import com.company.MyCollection.SetM;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -16,9 +17,11 @@ public class JUnitTests {
 
     ArrayListM<Integer> al = new ArrayListM<>();
     LinkedListM<Integer> ll = new LinkedListM<>();
+    SetM<Integer> setM = new SetM<>();
 
     @Before
     public void b(){
+        setM = new SetM<>();
         al = new ArrayListM<>();
         ll = new LinkedListM<>();
     }
@@ -28,6 +31,15 @@ public class JUnitTests {
         al.add(1);
         int exp = 1;
         int act = al.size();
+        assertEquals(act, exp);
+    }
+
+    @Test
+    public void testSetM(){
+        setM.add(4);
+        setM.add(4);
+        int exp = 4;
+        int act = setM.get(0);
         assertEquals(act, exp);
     }
 
@@ -71,17 +83,29 @@ public class JUnitTests {
         assertArrayEquals(new Integer[]{1}, al.getArray());
     }
 
+
+    @Test
+    public void testSet(){
+        Integer[] numbers = {1,3,4,3};
+        setM.init(numbers);
+
+        assertArrayEquals(new Integer[]{1, 3, 4}, setM.getArray());
+    }
+
     @Test
     public void LinkedListTest(){
 
-
         ll.add(1);
         ll.add(2);
-        ll.add(3);
-//        ll.add(2, 3);
-        ll.remove(2);
-        assertEquals(new Integer[]{1,2}, ll.getArray());
+//        ll.add(3);
+//       ll.add(2, 3);
+//        ll.remove(2);
+        assertArrayEquals(new Integer[]{1, 2,3}, ll.getArray());
     }
+
+
+
+
 
 
 
