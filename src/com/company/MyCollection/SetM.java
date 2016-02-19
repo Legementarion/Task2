@@ -199,8 +199,8 @@ public class SetM<E> implements AllMethod<E> {
     }
 
     /**
-     *
-     * */
+     * Assign an array to current ArrayList
+     */
     @Override
     public void init(E[] e) {
         if(e == null){
@@ -216,6 +216,9 @@ public class SetM<E> implements AllMethod<E> {
         size = elements.length;
     }
 
+    /**
+     * return original array from ArrayList
+     */
     public E[] getArray(){
         return elements;
     }

@@ -200,6 +200,9 @@ public class LinkedListM<E> implements AllMethod<E> {
         }
     }
 
+    /**
+     *
+     */
     public void clear() {
         if (size==0) {
             return;

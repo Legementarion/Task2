@@ -53,10 +53,15 @@ public class ArrayListM<E> implements AllMethod<E>{
      */
     public void add(int i, E e){
         if (i<0 || i>size) throw new ArrayIndexOutOfBoundsException();
+        if (i == size) {
+            add(e);
+        }
+        else {
         size++;
         elements = Arrays.copyOf(elements,size);
         System.arraycopy(elements, i, elements, i + 1,size-1 - i);
         elements[i] = e;
+        }
     }
 
     /**
@@ -176,8 +181,8 @@ public class ArrayListM<E> implements AllMethod<E>{
     }
 
     /**
-     *
-     * */
+     * Assign an array to current ArrayList
+     */
     @Override
     public void init(E[] e) {
         if(e == null){
@@ -189,6 +194,24 @@ public class ArrayListM<E> implements AllMethod<E>{
         }
     }
 
+    /**
+     * delete all elements from array
+     */
+    public void clear() {
+        if (size==0) {
+            return;
+        }
+        int i = 0;
+        while (i < size) {
+            remove(i);
+            i++;
+        }
+        size=0;
+    }
+
+    /**
+     * return original array from ArrayList
+     */
     public E[] getArray(){
         return elements;
     }
