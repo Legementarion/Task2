@@ -48,7 +48,7 @@ public class JUnitTests {
         Integer[] numbers = {1, 2, 3, 4, 5, 6};
         tst.init(numbers);
         tst.reverse();
-        assertArrayEquals(new Integer[]{6, 5, 4, 3, 2, 1}, tst.getArray());
+        assertArrayEquals(new Integer[]{6, 5, 4, 3, 2, 1}, tst.getArray(new Integer[tst.size()]));
     }
 
     @Test
@@ -56,7 +56,7 @@ public class JUnitTests {
         Integer[] numbers = {1, 2, 3, 4, 5, 6, 7};
         tst.init(numbers);
         tst.reverse();
-        assertArrayEquals(new Integer[]{7, 6, 5, 4, 3, 2, 1}, tst.getArray());
+        assertArrayEquals(new Integer[]{7, 6, 5, 4, 3, 2, 1}, tst.getArray(new Integer[tst.size()]));
     }
 
     @Test
@@ -64,15 +64,16 @@ public class JUnitTests {
         Integer[] numbers = {};
         tst.init(numbers);
         tst.reverse();
-        assertArrayEquals(new Integer[]{}, tst.getArray());
+        assertArrayEquals(new Integer[]{}, (new Integer[tst.size()]));
     }
 
     @Test
     public void testReverseWithNullArray() {
         Integer[] numbers = null;
+        Integer[] test ={};
         tst.init(numbers);
         tst.reverse();
-        assertArrayEquals(null, tst.getArray());
+        assertArrayEquals(test, tst.getArray(new Integer[tst.size()]));
     }
 
     @Test
@@ -80,7 +81,7 @@ public class JUnitTests {
         Integer[] numbers = {1};
         tst.init(numbers);
         tst.reverse();
-        assertArrayEquals(new Integer[]{1}, tst.getArray());
+        assertArrayEquals(new Integer[]{1}, tst.getArray(new Integer[tst.size()]));
     }
 
 
@@ -235,7 +236,7 @@ public class JUnitTests {
     {
         Integer[] ini = null;
         tst.init(ini);
-        Integer[] actual = tst.getArray();
+        Integer[] actual = tst.getArray(new Integer[tst.size()]);
         Integer[] expected = {};
         assertArrayEquals(expected, actual);
     }
@@ -244,7 +245,7 @@ public class JUnitTests {
     {
         Integer[] ini = {};
         tst.init(ini);
-        Integer[] actual = tst.getArray();
+        Integer[] actual = tst.getArray(new Integer[tst.size()]);
         Integer[] expected = {};
         assertArrayEquals(expected, actual);
     }
@@ -253,7 +254,7 @@ public class JUnitTests {
     {
         Integer[] ini = {10};
         tst.init(ini);
-        Integer[] actual = tst.getArray();
+        Integer[] actual = tst.getArray(new Integer[tst.size()]);
         Integer[] expected = {10};
         assertArrayEquals(expected, actual);
     }
@@ -262,7 +263,7 @@ public class JUnitTests {
     {
         Integer[] ini = {10,20};
         tst.init(ini);
-        Integer[] actual = tst.getArray();
+        Integer[] actual = tst.getArray(new Integer[tst.size()]);
         Integer[] expected = {10,20};
         assertArrayEquals(expected, actual);
     }
@@ -271,7 +272,7 @@ public class JUnitTests {
     {
         Integer[] ini = {10,20,30,40,50,60,70};
         tst.init(ini);
-        Integer[] actual = tst.getArray();
+        Integer[] actual = tst.getArray(new Integer[tst.size()]);
         Integer[] expected = {10,20,30,40,50,60,70};
         assertArrayEquals(expected, actual);
     }
@@ -286,7 +287,7 @@ public class JUnitTests {
         tst.init(ini);
         tst.add(3);
         assertEquals(1, tst.size());
-        Integer[] actual = tst.getArray();
+        Integer[] actual = tst.getArray(new Integer[tst.size()]);
         Integer[] expected = {3};
         assertArrayEquals(expected, actual);
     }
@@ -297,7 +298,7 @@ public class JUnitTests {
         tst.init(ini);
         tst.add(3);
         assertEquals(1, tst.size());
-        Integer[] actual = tst.getArray();
+        Integer[] actual = tst.getArray(new Integer[tst.size()]);
         Integer[] expected = {3};
         assertArrayEquals(expected, actual);
     }
@@ -308,7 +309,7 @@ public class JUnitTests {
         tst.init(ini);
         tst.add(3);
         assertEquals(2, tst.size());
-        Integer[] actual = tst.getArray();
+        Integer[] actual = tst.getArray(new Integer[tst.size()]);
         Integer[] expected = {132,3};
         assertArrayEquals(expected, actual);
     }
@@ -319,7 +320,7 @@ public class JUnitTests {
         tst.init(ini);
         tst.add(30);
         assertEquals(3, tst.size());
-        Integer[] actual = tst.getArray();
+        Integer[] actual = tst.getArray(new Integer[tst.size()]);
         Integer[] expected = {10,20,30};
         assertArrayEquals(expected, actual);
     }
@@ -330,7 +331,7 @@ public class JUnitTests {
         tst.init(ini);
         tst.add(3);
         assertEquals(6, tst.size());
-        Integer[] actual = tst.getArray();
+        Integer[] actual = tst.getArray(new Integer[tst.size()]);
         Integer[] expected = {132,435,57,9,2,3};
         assertArrayEquals(expected, actual);
     }
@@ -345,7 +346,7 @@ public class JUnitTests {
         tst.init(ini);
         tst.add(0, 0);
         assertEquals(1, tst.size());
-        Integer[] actual = tst.getArray();
+        Integer[] actual = tst.getArray(new Integer[tst.size()]);
         Integer[] expected = {0};
         assertArrayEquals(expected, actual);
     }
@@ -356,7 +357,7 @@ public class JUnitTests {
         tst.init(ini);
         tst.add(0, 0);
         assertEquals(1, tst.size());
-        Integer[] actual = tst.getArray();
+        Integer[] actual = tst.getArray(new Integer[tst.size()]);
         Integer[] expected = {0};
         assertArrayEquals(expected, actual);
     }
@@ -367,7 +368,7 @@ public class JUnitTests {
         tst.init(ini);
         tst.add(1, 1);
         assertEquals(2, tst.size());
-        Integer[] actual = tst.getArray();
+        Integer[] actual = tst.getArray(new Integer[tst.size()]);
         Integer[] expected = {132,1};
         assertArrayEquals(expected, actual);
     }
@@ -378,7 +379,7 @@ public class JUnitTests {
         tst.init(ini);
         tst.add(2, 30);
         assertEquals(3, tst.size());
-        Integer[] actual = tst.getArray();
+        Integer[] actual = tst.getArray(new Integer[tst.size()]);
         Integer[] expected = {10,20,30};
         assertArrayEquals(expected, actual);
     }
@@ -389,7 +390,7 @@ public class JUnitTests {
         tst.init(ini);
         tst.add(3, 80);
         assertEquals(8, tst.size());
-        Integer[] actual = tst.getArray();
+        Integer[] actual = tst.getArray(new Integer[tst.size()]);
         Integer[] expected = {10,20,30,80,40,50,60,70};
         assertArrayEquals(expected, actual);
     }
@@ -400,7 +401,7 @@ public class JUnitTests {
         tst.init(ini);
         tst.add(7, 80);
         assertEquals(8, tst.size());
-        Integer[] actual = tst.getArray();
+        Integer[] actual = tst.getArray(new Integer[tst.size()]);
         Integer[] expected = {10,20,30,40,50,60,70,80};
         assertArrayEquals(expected, actual);
     }
@@ -411,18 +412,18 @@ public class JUnitTests {
         tst.init(ini);
         tst.add(0, 80);
         assertEquals(8, tst.size());
-        Integer[] actual = tst.getArray();
+        Integer[] actual = tst.getArray(new Integer[tst.size()]);
         Integer[] expected = {80,10,20,30,40,50,60,70};
         assertArrayEquals(expected, actual);
     }
-    @Test (expected = IllegalArgumentException.class)
+    @Test (expected = ArrayIndexOutOfBoundsException.class)
     public void testAddPos_Ex1()
     {
         Integer[] ini = {1,4,6,8};
         tst.init(ini);
         tst.add(5, 344);
     }
-    @Test (expected = IllegalArgumentException.class)
+    @Test (expected = ArrayIndexOutOfBoundsException.class)
     public void testAddPos_Ex2()
     {
         Integer[] ini = {1,4,6,8};
@@ -433,14 +434,14 @@ public class JUnitTests {
     //============================================
     //              DelPos
     //============================================
-    @Test (expected = IllegalArgumentException.class)
+    @Test (expected = ArrayIndexOutOfBoundsException.class)
     public void testDelPos_null()
     {
         Integer[] ini = null;
         tst.init(ini);
         tst.remove(0);
     }
-    @Test (expected = IllegalArgumentException.class)
+    @Test (expected = ArrayIndexOutOfBoundsException.class)
     public void testDelPos_0()
     {
         Integer[] ini = {};
@@ -454,7 +455,7 @@ public class JUnitTests {
         tst.init(ini);
         tst.remove(0);
         assertEquals(0, tst.size());
-        Integer[] actual = tst.getArray();
+        Integer[] actual = tst.getArray(new Integer[tst.size()]);
         Integer[] expected = {};
         assertArrayEquals(expected, actual);
     }
@@ -465,7 +466,7 @@ public class JUnitTests {
         tst.init(ini);
         tst.remove(1);
         assertEquals(1, tst.size());
-        Integer[] actual = tst.getArray();
+        Integer[] actual = tst.getArray(new Integer[tst.size()]);
         Integer[] expected = {132};
         assertArrayEquals(expected, actual);
     }
@@ -476,7 +477,7 @@ public class JUnitTests {
         tst.init(ini);
         tst.remove(2);
         assertEquals(4, tst.size());
-        Integer[] actual = tst.getArray();
+        Integer[] actual = tst.getArray(new Integer[tst.size()]);
         Integer[] expected = {132,435,9,2};
         assertArrayEquals(expected, actual);
     }
@@ -487,7 +488,7 @@ public class JUnitTests {
         tst.init(ini);
         tst.remove(2);
         assertEquals(4, tst.size());
-        Integer[] actual = tst.getArray();
+        Integer[] actual = tst.getArray(new Integer[tst.size()]);
         Integer[] expected = {132,435,9,2};
         assertArrayEquals(expected, actual);
     }
@@ -498,7 +499,7 @@ public class JUnitTests {
         tst.init(ini);
         tst.remove(0);
         assertEquals(2, tst.size());
-        Integer[] actual = tst.getArray();
+        Integer[] actual = tst.getArray(new Integer[tst.size()]);
         Integer[] expected = {234,555};
         assertArrayEquals(expected, actual);
     }
@@ -509,18 +510,18 @@ public class JUnitTests {
         tst.init(ini);
         tst.remove(2);
         assertEquals(2, tst.size());
-        Integer[] actual = tst.getArray();
+        Integer[] actual = tst.getArray(new Integer[tst.size()]);
         Integer[] expected = {10,20};
         assertArrayEquals(expected, actual);
     }
-    @Test (expected = IllegalArgumentException.class)
+    @Test (expected = ArrayIndexOutOfBoundsException.class)
     public void testDelPos_Ex1()
     {
         Integer[] ini = {10,20,30,40,50,60,70};
         tst.init(ini);
         tst.remove(8);
     }
-    @Test (expected = IllegalArgumentException.class)
+    @Test (expected = ArrayIndexOutOfBoundsException.class)
     public void testDelPos_Ex2()
     {
         Integer[] ini = {10,20,30,40,50,60,70};
@@ -728,7 +729,7 @@ public class JUnitTests {
 //        Integer[] ini = {132};
 //        tst.init(ini);
 //        tst.sort();
-//        Integer[] act = tst.getArray()();
+//        Integer[] act = tst.getArray(new Integer[tst.size()]();
 //        Integer[] exp = {132};
 //        assertArrayEquals(exp, act);
 //    }
@@ -738,7 +739,7 @@ public class JUnitTests {
 //        Integer[] ini = {10,20};
 //        tst.init(ini);
 //        tst.sort();
-//        Integer[] act = tst.getArray()();
+//        Integer[] act = tst.getArray(new Integer[tst.size()]();
 //        Integer[] exp = {10,20};
 //        assertArrayEquals(exp, act);
 //    }
@@ -748,7 +749,7 @@ public class JUnitTests {
 //        Integer[] ini = {132,435,57,9,2};
 //        tst.init(ini);
 //        tst.sort();
-//        Integer[] act = tst.getArray()();
+//        Integer[] act = tst.getArray(new Integer[tst.size()]();
 //        Integer[] exp = {2, 9, 57, 132, 435};
 //        assertArrayEquals(exp, act);
 //    }
@@ -756,14 +757,14 @@ public class JUnitTests {
     //============================================
     //              Reverse
     //============================================
-    @Test (expected = IllegalArgumentException.class)
+    @Test
     public void testReverse_null()
     {
         Integer[] ini = null;
         tst.init(ini);
         tst.reverse();
     }
-    @Test (expected = IllegalArgumentException.class)
+    @Test
     public void testReverse_0()
     {
         Integer[] ini = {};
@@ -776,7 +777,7 @@ public class JUnitTests {
         Integer[] ini = {9};
         tst.init(ini);
         tst.reverse();
-        Integer[] act = tst.getArray();
+        Integer[] act = tst.getArray(new Integer[tst.size()]);
         Integer[] exp = {9};
         assertArrayEquals(exp, act);
     }
@@ -786,7 +787,7 @@ public class JUnitTests {
         Integer[] ini = {9,2};
         tst.init(ini);
         tst.reverse();
-        Integer[] act = tst.getArray();
+        Integer[] act = tst.getArray(new Integer[tst.size()]);
         Integer[] exp = {2, 9};
         assertArrayEquals(exp, act);
     }
@@ -796,7 +797,7 @@ public class JUnitTests {
         Integer[] ini = {132,435,57,9,2};
         tst.init(ini);
         tst.reverse();
-        Integer[] act = tst.getArray();
+        Integer[] act = tst.getArray(new Integer[tst.size()]);
         Integer[] exp = {2, 9 ,57, 435, 132};
         assertArrayEquals(exp, act);
     }
@@ -842,14 +843,14 @@ public class JUnitTests {
         int res = tst.get(2);
         assertEquals(9, res);
     }
-    @Test (expected = IllegalArgumentException.class)
+    @Test (expected = ArrayIndexOutOfBoundsException.class)
     public void testGet_10()
     {
         Integer[] ini = {435,57,9,2};
         tst.init(ini);
         tst.get(10);
     }
-    @Test (expected = IllegalArgumentException.class)
+    @Test (expected = ArrayIndexOutOfBoundsException.class)
     public void testGet_min()
     {
         Integer[] ini = {435,57,9,2};
@@ -887,7 +888,7 @@ public class JUnitTests {
         Integer[] ini = {435};
         tst.init(ini);
         tst.set(0, 200);
-        Integer[] act = tst.getArray();
+        Integer[] act = tst.getArray(new Integer[tst.size()]);
         Integer[] exp = {200};
         assertArrayEquals(exp, act);
     }
@@ -897,7 +898,7 @@ public class JUnitTests {
         Integer[] ini = {435,57};
         tst.init(ini);
         tst.set(1, 200);
-        Integer[] act = tst.getArray();
+        Integer[] act = tst.getArray(new Integer[tst.size()]);
         Integer[] exp = {435, 200};
         assertArrayEquals(exp, act);
     }
@@ -907,7 +908,7 @@ public class JUnitTests {
         Integer[] ini = {435,57,9,2};
         tst.init(ini);
         tst.set(2, 100);
-        Integer[] act = tst.getArray();
+        Integer[] act = tst.getArray(new Integer[tst.size()]);
         Integer[] exp = {435, 57, 100, 2};
         assertArrayEquals(exp, act);
     }
@@ -917,7 +918,7 @@ public class JUnitTests {
         Integer[] ini = {435,57,9,2};
         tst.init(ini);
         tst.set(1, 200);
-        Integer[] act = tst.getArray();
+        Integer[] act = tst.getArray(new Integer[tst.size()]);
         Integer[] exp = {435, 200, 9, 2};
         assertArrayEquals(exp, act);
     }
@@ -927,7 +928,7 @@ public class JUnitTests {
         Integer[] ini = {10,20,30,40,50,60,70};
         tst.init(ini);
         tst.set(6, 80);
-        Integer[] act = tst.getArray();
+        Integer[] act = tst.getArray(new Integer[tst.size()]);
         Integer[] exp = {10,20,30,40,50,60,80};
         assertArrayEquals(exp, act);
     }

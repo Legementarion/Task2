@@ -22,7 +22,7 @@ public interface AllMethod<E> {
     public void set(int i, E e);
 
     /**Sort Ascending or Descending */
-    public void sort();
+    public boolean sort(boolean fromMinToMax);
 
     /**reverse all object of collection */
     public void reverse();

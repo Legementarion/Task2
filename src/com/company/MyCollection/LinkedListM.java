@@ -138,8 +138,29 @@ public class LinkedListM<E> implements AllMethod<E> {
      * Sort Ascending or Descending
      */
     @Override
-    public void sort() {
-
+    public boolean sort(boolean fromMinToMax) {
+//        E[] sortedArray = elements;
+//
+//        if (size() == 0) {
+//            return false;
+//        }
+//        for (int i = size; i > 0; i--) {
+//            for (int j = 0; j < i; j++) {
+//                checkForCompare(elements[j], elements[j + 1]);
+//                if (((Comparable) sortedArray[j]).compareTo(sortedArray[j + 1]) == 1) {
+//                    E tmp = sortedArray[j];
+//                    sortedArray[j] = sortedArray[j + 1];
+//                    sortedArray[j + 1] = tmp;
+//                }
+//            }
+//        }
+//
+//        if (!fromMinToMax)
+//            reverse();
+//
+//        elements = sortedArray;
+//        System.out.println("Array sorted: \n" + this.toString());
+        return true;
     }
 
     /**

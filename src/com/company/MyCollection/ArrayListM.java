@@ -2,6 +2,7 @@ package com.company.MyCollection;
 
 import com.company.MyCollection.Exeptions.OutEception;
 
+import java.lang.reflect.Array;
 import java.util.AbstractCollection;
 import java.util.Arrays;
 import java.util.Collection;
@@ -11,93 +12,102 @@ import java.util.Iterator;
  * @author Lego on 16.02.2016.
  * @version 1.0
  */
-public class ArrayListM<E> implements AllMethod<E>{
+public class ArrayListM<E> implements AllMethod<E> {
 
-    /**Array of objects */
-    private E[] elements;
+    /**
+     * Array of objects
+     */
+    private Object[] elements;
 
-    /**size of array */
-    private int size=0;
+    /**
+     * size of array
+     */
+    private int size = 0;
 
 
     /**
      * create new empty ArrayListM
      */
     public ArrayListM() {
-        elements = (E[])new Object[]{};
+        elements = (E[]) new Object[]{};
     }
 
     /**
      * create new ArrayListM with fixed size
+     *
      * @param size
      */
     public ArrayListM(int size) {
-        elements = (E[])new Object[size];
+        elements = (E[]) new Object[size];
     }
 
     /**
      * add object to the end of collection
+     *
      * @param e value
      */
     @Override
     public void add(E e) {
         size++;
-        elements = Arrays.copyOf(elements,size);
-        elements[size-1] = e;
+        elements = Arrays.copyOf(elements, size);
+        elements[size - 1] = e;
     }
 
     /**
      * add object between values by index
+     *
      * @param i index
      * @param e value
      */
-    public void add(int i, E e){
-        if (i<0 || i>size) throw new ArrayIndexOutOfBoundsException();
+    public void add(int i, E e) {
+        if (i < 0 || i > size) throw new ArrayIndexOutOfBoundsException();
         if (i == size) {
             add(e);
-        }
-        else {
-        size++;
-        elements = Arrays.copyOf(elements,size);
-        System.arraycopy(elements, i, elements, i + 1,size-1 - i);
-        elements[i] = e;
+        } else {
+            size++;
+            elements = Arrays.copyOf(elements, size);
+            System.arraycopy(elements, i, elements, i + 1, size - 1 - i);
+            elements[i] = e;
         }
     }
 
     /**
      * get object from collection by index
+     *
      * @param i index
      */
     @Override
-    public E get(int i){
-        if (i>=size|| i<0) {
+    public E get(int i) {
+        if (i >= size || i < 0) {
             throw new ArrayIndexOutOfBoundsException();
         }
-        return elements[i];
+        return (E) elements[i];
     }
 
     /**
      * remove object from collection
+     *
      * @param i index
      */
     @Override
     public void remove(int i) {
-        if (i>=size || i<0) {
+        if (i > size || i < 0) {
             throw new ArrayIndexOutOfBoundsException();
         }
-        elements = Arrays.copyOf(elements,size);
-        System.arraycopy(elements, i+1, elements, i,size - i-1);
+        elements = Arrays.copyOf(elements, size);
+        System.arraycopy(elements, i + 1, elements, i, size - i - 1);
         size--;
     }
 
     /**
      * assigns the value of the index
+     *
      * @param i index
      * @param e value
      */
     @Override
     public void set(int i, E e) {
-        if (i>=size || i<0) {
+        if (i >= size || i < 0) {
             throw new ArrayIndexOutOfBoundsException();
         }
         elements[i] = e;
@@ -107,38 +117,45 @@ public class ArrayListM<E> implements AllMethod<E>{
      * Sort by Ascending or Descending
      */
     @Override
-    public void sort() {
-        int start = 0;
-        int end = size - 1;
-        dosort(start,end);
-    }
+    public boolean sort(boolean fromMinToMax) {
+        E[] sortedArray = (E[]) elements;
 
-
-    public void dosort(int start, int end){
-        if (start >= end)
-            return;
-        int i = start, j = end;
-        int cur = i - (i - j) / 2;
-        while (i < j) {
-            while (i < cur && (elements[i] == elements[cur])) {
-                i++;
-            }
-            while (j > cur && (elements[cur].hashCode() <= elements[j].hashCode())) {
-                j--;
-            }
-            if (i < j) {
-                E temp = elements[i];
-                elements[i] = elements[j];
-                elements[j] = temp;
-                if (i == cur)
-                    cur = j;
-                else if (j == cur)
-                    cur = i;
+        if (size() == 0) {
+            return false;
+        }
+        for (int i = size; i > 0; i--) {
+            for (int j = 0; j < i; j++) {
+                checkForCompare((E) elements[j], (E) elements[j + 1]);
+                if (((Comparable) sortedArray[j]).compareTo(sortedArray[j + 1]) == 1) {
+                    E tmp = sortedArray[j];
+                    sortedArray[j] = sortedArray[j + 1];
+                    sortedArray[j + 1] = tmp;
+                }
             }
         }
-        dosort(start, cur);
-        dosort(cur+1, end);
+
+        if (!fromMinToMax)
+            reverse();
+
+        elements = sortedArray;
+        System.out.println("Array sorted: \n" + this.toString());
+        return true;
     }
+
+    /**
+     * method to compare two values
+     */
+    private boolean checkForCompare(E el1, E el2) {
+        if (el1 == null || el2 == null)
+            throw new ClassCastException("Can't compare elements. Values contains nulls");
+        else if (!el1.getClass().equals(el2.getClass()))
+            throw new ClassCastException("Can't compare elements with different classes");
+        else if (!(el1 instanceof Comparable) || !(el2 instanceof Comparable))
+            throw new ClassCastException("Can't compare elements. No criteria for compare");
+
+        return true;
+    }
+
 
     /**
      * reverse all object of collection
@@ -149,10 +166,10 @@ public class ArrayListM<E> implements AllMethod<E>{
             return;
         }
         E temp;
-        for (int i = 0; i< size/2; i++){
-                temp = elements[i];
-                elements[i] = elements[size - 1 - i];
-                elements[size - 1 - i] = temp;
+        for (int i = 0; i < size / 2; i++) {
+            temp = (E) elements[i];
+            elements[i] = elements[size - 1 - i];
+            elements[size - 1 - i] = temp;
         }
     }
 
@@ -185,8 +202,9 @@ public class ArrayListM<E> implements AllMethod<E>{
      */
     @Override
     public void init(E[] e) {
-        if(e == null){
-            elements=e;
+        if (e == null) {
+            elements = new Object[]{};
+            ;
             size = 0;
         } else {
             elements = e;
@@ -198,7 +216,7 @@ public class ArrayListM<E> implements AllMethod<E>{
      * delete all elements from array
      */
     public void clear() {
-        if (size==0) {
+        if (size == 0) {
             return;
         }
         int i = 0;
@@ -206,13 +224,30 @@ public class ArrayListM<E> implements AllMethod<E>{
             remove(i);
             i++;
         }
-        size=0;
+        size = 0;
     }
 
     /**
      * return original array from ArrayList
      */
-    public E[] getArray(){
-        return elements;
+    public E[] getArray() {
+
+        int i = 0;
+        E[] buf = (E[]) new Object[size];
+        while (i < size()) {
+            buf[i] = (E) elements[i];
+            i++;
+        }
+
+        return buf;
+    }
+
+    public <T> T[] getArray(T[] t) {
+        if (t.length < size)
+            return (T[]) Arrays.copyOf(elements, size, t.getClass());
+        System.arraycopy(elements, 0, t, 0, size);
+        if (t.length > size)
+            t[size] = null;
+        return t;
     }
 }

@@ -16,14 +16,14 @@ public class SetM<E> implements AllMethod<E> {
 
 
     /**
-     * create new empty ArrayListM
+     * create new empty Array
      */
     public SetM() {
         elements = (E[])new Object[]{};
     }
 
     /**
-     * create new ArrayListM with fixed size
+     * create new Array with fixed size
      * @param size
      */
     public SetM(int size) {
@@ -78,7 +78,7 @@ public class SetM<E> implements AllMethod<E> {
 
 
     /**
-     * remove object from collection
+     * remove object from collection by index
      * @param i index
      */
     @Override
@@ -91,6 +91,10 @@ public class SetM<E> implements AllMethod<E> {
         size--;
     }
 
+    /**
+     * remove object from collection by value
+     * @param e value
+     */
     public void remove(E e) {
         for (int i = 0; i < size; i ++){
             if (elements[i].equals(e)){
@@ -99,11 +103,10 @@ public class SetM<E> implements AllMethod<E> {
                 size--;
             }
         }
-
     }
 
     /**
-     * assigns the value of the index
+     * assigns the value by the index
      * @param i index
      * @param e value
      */
@@ -125,37 +128,40 @@ public class SetM<E> implements AllMethod<E> {
      * Sort by Ascending or Descending
      */
     @Override
-    public void sort() {
-        int start = 0;
-        int end = size - 1;
-        dosort(start,end);
-    }
+    public boolean sort(boolean fromMinToMax) {
+        E[] sortedArray = elements;
 
-
-    public void dosort(int start, int end){
-        if (start >= end)
-            return;
-        int i = start, j = end;
-        int cur = i - (i - j) / 2;
-        while (i < j) {
-            while (i < cur && (elements[i] == elements[cur])) {
-                i++;
-            }
-            while (j > cur && (elements[cur].hashCode() <= elements[j].hashCode())) {
-                j--;
-            }
-            if (i < j) {
-                E temp = elements[i];
-                elements[i] = elements[j];
-                elements[j] = temp;
-                if (i == cur)
-                    cur = j;
-                else if (j == cur)
-                    cur = i;
+        if (size() == 0) {
+            return false;
+        }
+        for (int i = size; i > 0; i--) {
+            for (int j = 0; j < i-1; j++) {
+                checkForCompare(elements[j], elements[j + 1]);
+                if (((Comparable) sortedArray[j]).compareTo(sortedArray[j + 1]) == 1) {
+                    E tmp = sortedArray[j];
+                    sortedArray[j] = sortedArray[j + 1];
+                    sortedArray[j + 1] = tmp;
+                }
             }
         }
-        dosort(start, cur);
-        dosort(cur+1, end);
+
+        if (!fromMinToMax)
+            reverse();
+        elements = sortedArray;
+        return true;
+    }
+
+    /**
+     * method to compare two values with unknown type
+     */
+    private boolean checkForCompare(E e1, E e2) {
+        if (e1 == null || e2 == null)
+            throw new ClassCastException("Values contains nulls!!!");
+        else if (!e1.getClass().equals(e2.getClass()))
+            throw new ClassCastException("Elements with different classes!");
+        else if (!(e1 instanceof Comparable) || !(e2 instanceof Comparable))
+            throw new ClassCastException("No criteria to compare");
+        return true;
     }
 
     /**
@@ -187,7 +193,13 @@ public class SetM<E> implements AllMethod<E> {
      */
     @Override
     public E min() {
-        return null;
+        E min = elements[0];
+        for (int i = 1; i < size() ; i++) {
+            checkForCompare(min, elements[i]);
+            if (((Comparable) min).compareTo(elements[i]) == 1)
+                min = elements[i];
+        }
+        return min;
     }
 
     /**
@@ -195,11 +207,17 @@ public class SetM<E> implements AllMethod<E> {
      */
     @Override
     public E max() {
-        return null;
+        E max = elements[0];
+        for (int i = 1; i < size() ; i++) {
+            checkForCompare(max, elements[i]);
+            if (((Comparable) max).compareTo(elements[i]) == -1)
+                max = elements[i];
+        }
+        return max;
     }
 
     /**
-     * Assign an array to current ArrayList
+     * Assign an array to current Set
      */
     @Override
     public void init(E[] e) {
@@ -217,7 +235,7 @@ public class SetM<E> implements AllMethod<E> {
     }
 
     /**
-     * return original array from ArrayList
+     * return original array from Set
      */
     public E[] getArray(){
         return elements;
