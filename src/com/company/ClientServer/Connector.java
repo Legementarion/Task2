@@ -1,63 +1,83 @@
 package com.company.ClientServer;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.net.InetAddress;
 import java.net.Socket;
+import java.net.UnknownHostException;
 import javax.swing.JOptionPane;
+/**
+ * Class for connection with server
+ * @author Lego
+ * @version 1.0
+ * */
+public class Connector {
 
-public class Connector implements Runnable{
-
-	private static ObjectOutputStream output;
-	private static ObjectInputStream input;
-	private static Socket connection;
-//	private static boolean isRunning = true;
 
 	Connector(String str){
-        try {
-            connection = new Socket(InetAddress.getByName(str), 1111);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-	}
+		String serverHostname = str;
+		System.out.println ("Connection to host " +
+				serverHostname + " on port 1111.");
 
-	@Override
-	public void run() {
+		Socket echoSocket = null;
+		PrintWriter out = null;
+		BufferedReader in = null;
+
 		try {
-			while(true){
-				output = new ObjectOutputStream(connection.getOutputStream());
-				output.flush();
-				input = new ObjectInputStream(connection.getInputStream());
-				String response = (String)input.readObject();
-				System.out.println(response);
-				System.out.println("------------------");
-			}
-//			close();
-		}catch(Exception e) {
+			echoSocket = new Socket(serverHostname, 1111);
+			out = new PrintWriter(echoSocket.getOutputStream(), true);
+			in = new BufferedReader(new InputStreamReader(
+					echoSocket.getInputStream()));
+		} catch (UnknownHostException e) {
+			System.err.println("Don't know about host: " + serverHostname);
+			System.exit(1);
+		} catch (IOException e) {
+			System.err.println("Couldn't get I/O for "
+					+ "the connection to: " + serverHostname);
+			System.exit(1);
+		}
+
+		BufferedReader stdIn = new BufferedReader(
+				new InputStreamReader(System.in));
+		String userInput;
+
+		System.out.println ("Type message (\"exit\" to quit)");
+		System.out.println ("Please, enter your request");
+		try {
+			while ((userInput = stdIn.readLine()) != null)
+            {
+                out.println(userInput);
+
+                if (userInput.equals("exit"))
+                    break;
+
+                String st = in.readLine();
+                String[] split = st.split("=");
+                int i = 0;
+
+                while (i<split.length){
+                    System.out.println("Answer from server: " + split[i]);
+                    i++;
+                }
+            }
+		} catch (IOException e) {
 			e.printStackTrace();
-			}
-		finally{
-			close();
+		}
+
+		out.close();
+		try {
+			in.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		try {
+			stdIn.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		try {
+			echoSocket.close();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
-
-	public void sendMessage(String str){
-		try {
-			output.flush();
-			output.writeObject(str);
-			output.flush();
-
-		} catch (Exception e) {e.printStackTrace();}
-	}
-
-	public void close() {
-		try {
-//			isRunning = false;
-			output.close();
-			input.close();
-			connection.close();
-		} catch (Exception e) {e.printStackTrace();}
-	}
-
 }

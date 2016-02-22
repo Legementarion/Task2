@@ -26,9 +26,12 @@ public class Presentation implements Connect{
     /**incoming value for array */
     public int value = -1;
 
+
+    SetM<Integer> setM = new SetM<>();
+
     /** SET*/
     public void presentSet(int size){
-        SetM<Integer> setM = new SetM<>();
+
         setM.init(fillCollection(size));
         in = new Scanner(System.in);
 
@@ -80,6 +83,7 @@ public class Presentation implements Connect{
                         break;
                     } else {
                         in.reset();
+                        buf.setLength(0);
                         System.out.println(soutMenu[2]);
                         System.out.println();
                     }
@@ -99,6 +103,7 @@ public class Presentation implements Connect{
                         break;
                     } else {
                         in.reset();
+                        buf.setLength(0);
                         System.out.println(soutMenu[2]);
                         System.out.println();
                     }
@@ -126,6 +131,7 @@ public class Presentation implements Connect{
                     buf.setLength(0);
                 } else {
                     in.reset();
+                    buf.setLength(0);
                     System.out.println(soutMenu[2]);
                     System.out.println();
                 }
@@ -148,6 +154,7 @@ public class Presentation implements Connect{
                     buf.setLength(0);
                 } else {
                     in.reset();
+                    buf.setLength(0);
                     System.out.println(soutMenu[2]);
                     System.out.println();
                 }
@@ -178,6 +185,7 @@ public class Presentation implements Connect{
                         break;
                     } else {
                         in.reset();
+                        buf.setLength(0);
                         System.out.println(soutMenu[2]);
                         System.out.println();
                     }
@@ -197,6 +205,7 @@ public class Presentation implements Connect{
                         break;
                     } else {
                         in.reset();
+                        buf.setLength(0);
                         System.out.println(soutMenu[2]);
                         System.out.println();
                     }
@@ -249,32 +258,41 @@ public class Presentation implements Connect{
         //init
         System.out.println(soutArray[7]);
         ok = true;
-        while(ok){
+        int i = 0;
+        System.out.println("enter size of input mass");
+        int sizea = in.nextInt();
+        Integer[] numbers = new Integer[sizea];
+        while(ok) {
             System.out.println(soutSet[7]);
-            if(in.hasNextInt()){
-                setM.add(in.nextInt());
-                buf.setLength(0);
-                printS(setM);
-            } else {
-                buf.append(in.next());
-                if (buf.toString().equals("next")){
-                    ok = false;
-                } else {
-                    in.reset();
-                    System.out.println(soutMenu[2]);
-                    System.out.println();
+            while (i < sizea) {
+                if (in.hasNextInt()) {
+                    numbers[i] = in.nextInt();
+                    i++;
                 }
             }
-        }
+            setM.init(numbers);
+            printS(setM);
+            buf.setLength(0);
+            buf.append(in.next());
+            if (buf.toString().equals("next")) {
+                ok = false;
+                break;
 
+            }else {
+                in.reset();
+                buf.setLength(0);
+                System.out.println(soutMenu[2]);
+                System.out.println();
+            }
+        }
 
         //sort
         System.out.println(soutArray[8]);
         ok = true;
         while(ok){
             System.out.println(soutSet[8]);
-            if(in.hasNextInt()){
-                setM.add(in.nextInt());
+            if(in.hasNextBoolean()){
+                setM.sort(in.nextBoolean());
                 buf.setLength(0);
                 printS(setM);
             } else {
@@ -283,6 +301,7 @@ public class Presentation implements Connect{
                     ok = false;
                 } else {
                     in.reset();
+                    buf.setLength(0);
                     System.out.println(soutMenu[2]);
                     System.out.println();
                 }
@@ -292,24 +311,8 @@ public class Presentation implements Connect{
 
         //max & min
         System.out.println(soutArray[9]);
-        ok = true;
-        while(ok){
-            System.out.println(soutSet[9]);
-            if(in.hasNextInt()){
-                setM.add(in.nextInt());
-                buf.setLength(0);
-                printS(setM);
-            } else {
-                buf.append(in.next());
-                if (buf.toString().equals("next")){
-                    ok = false;
-                } else {
-                    in.reset();
-                    System.out.println(soutMenu[2]);
-                    System.out.println();
-                }
-            }
-        }
+        System.out.println(setM.min() + " min");
+        System.out.println(setM.max() + " max");
     }
 
 
@@ -810,6 +813,12 @@ public class Presentation implements Connect{
 
         for(int i = 0; i <size; i++){
             num[i] = (int)(Math.random() *100);
+            for(int j = 0; j < i; j++){
+                if (num[i]== num[j]){
+                    i--;
+                }
+            }
+
         }
 
         return num;

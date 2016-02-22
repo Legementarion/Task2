@@ -14,7 +14,7 @@ public class MyData {
             "-----------------   9. Min & Max  ------------------------"
     };
 
-    final static String[] soutSet = {"add to SET -","add to SET by index -","get from set -","Remove from set by index-","set to SET -","Type anything to reverse Set","Type anything to see size of Set- ", "Type true or false to sort Set by ascending or descending", "Type anything to see Min and Max value"};
+    final static String[] soutSet = {"add to SET -","add to SET by index -","get from set -","Remove from set by index-","set to SET -","Type anything to reverse Set","Type anything to see size of Set- ", "input values to fill the Set","Type true or false to sort Set by ascending or descending", "Type anything to see Min and Max value"};
     final static String[] soutMap = {"add to MAP -","add to MAP by index -","get from MAP -","Remove from MAP by index-","set to MAP -","Type anything to reverse MAP","Type anything to see size of MAP- "};
     final static String[] soutLink = {"add to LinkedList -","add to LinkedList by index -","get from LinkedList -","Remove from LinkedList by index-","set to LinkedList -","Type anything to reverse LinkedList","Type anything to see size of LinkedList- "};
 

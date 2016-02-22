@@ -36,14 +36,16 @@ public class SetM<E> implements AllMethod<E> {
      */
     @Override
     public void add(E e) {
-        for (E each: elements){
-            if (each.equals(e)){
-                return;
+        if(size!=0) {
+            for (E each : elements) {
+                if (each.equals(e)) {
+                    return;
+                }
             }
         }
-        size++;
-        elements = Arrays.copyOf(elements,size);
-        elements[size-1] = e;
+            size++;
+            elements = Arrays.copyOf(elements,size);
+            elements[size-1] = e;
     }
 
     /**
@@ -225,6 +227,8 @@ public class SetM<E> implements AllMethod<E> {
             elements=e;
             size = 0;
         } else {
+            elements = (E[])new Object[]{};
+            size = 0;
             for (E each: e){
                 if (!each.equals(e)){
                     add(each);

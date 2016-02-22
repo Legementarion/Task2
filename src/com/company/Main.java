@@ -33,7 +33,7 @@ public class Main implements Connect{
         /** value for choise*/
         int choice = 0;
 
-
+        /** */
         int size = 0;
 
 

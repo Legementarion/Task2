@@ -1,31 +1,52 @@
 package com.company.ClientServer;
 
 import javax.swing.JOptionPane;
-
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+/**
+ * Class start connection
+ * @author Lego
+ * @version 1.0
+ * */
 public class Main {
-	
-	static ServerL server = new ServerL();
+
+	/** create connection to server*/
 	static Connector connector;
-	static Thread serverThread = new Thread (server);
+
+	/** statment for check correct ip*/
+	static boolean check = false;
+
+	/**ip idress */
+	static String log;
 	
-	public static void main(String[] args) throws InterruptedException {	
-//		serverThread.start();
+	public static void main(String[] args) throws InterruptedException {
 
-		String log = JOptionPane.showInputDialog("Input IP");
-		Thread clienrThread = new Thread(connector = new Connector(log));
-		clienrThread.start();
-
-
-		boolean ok = true;
-		while (ok) {
-			String str = JOptionPane.showInputDialog("Input Country");
-            if (str.equals("close")){
-                ok = false;
-                connector.close();
-            }else{
-                connector.sendMessage(str);
-            }
+		while (!check){
+			log = JOptionPane.showInputDialog("Input IP");
+			if(checkIp(log)){
+				check = true;
+				System.out.println(log +" - Conncection");
+			}else{
+				System.out.println(log +" - Wrong adress!");
+			}
 		}
-	}			
+		connector = new Connector(log);
+	}
+
+
+
+/**
+ * method for check correct ip adress
+ */
+	public static boolean checkIp(String str){
+		Pattern pattern = Pattern.compile("^((25[0-5]|2[0-4]\\d|[01]?\\d\\d?)\\.){3}(25[0-5]|2[0-4]\\d|[01]?\\d\\d?)$");
+		Matcher matcher = pattern.matcher(str);
+
+		if (matcher.matches()){
+			return true;
+		}else {
+			return false;
+		}
+	}
 }
 
